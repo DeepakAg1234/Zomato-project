@@ -1,0 +1,101 @@
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+  --color-canvas: #fffbfb;
+  --color-heading: #1c1c1c;
+  --color-body: #3d3d3d;
+  --color-muted: #767676;
+  --color-divider: #f1e4e4;
+  --color-brand: #e23744;
+  --color-brand-pressed: #cb202d;
+  --color-brand-disabled: #f8a5ac;
+  --color-soft: #fff1f1;
+  --color-rating: #267e3e;
+  --color-rating-bg: #e8f5e9;
+  --color-rating-border: #c8e6c9;
+  --color-success: #1f6b34;
+  --color-success-bg: #e8f5e9;
+  --color-success-border: #c8e6c9;
+  --color-info: #1a4b8c;
+  --color-info-bg: #eef4fc;
+  --color-info-border: #d5e5f9;
+  --color-warning: #8a4b08;
+  --color-warning-bg: #fff6e8;
+  --color-warning-border: #fde5be;
+  --color-danger: #9b1c2c;
+  --color-danger-bg: #fff1f1;
+  --color-danger-border: #f8d2d2;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  background: var(--color-canvas);
+  color: var(--color-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+input[type="range"].slider-red {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  background: transparent;
+}
+
+input[type="range"].slider-red:focus {
+  outline: none;
+}
+
+input[type="range"].slider-red::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #f1e4e4;
+  border-radius: 9999px;
+}
+
+input[type="range"].slider-red::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  cursor: pointer;
+  background: #f1e4e4;
+  border-radius: 9999px;
+}
+
+input[type="range"].slider-red::-webkit-slider-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #e23744;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -6px;
+  box-shadow: 0 1px 3px rgba(226, 55, 68, 0.4);
+  border: 2px solid #ffffff;
+}
+
+input[type="range"].slider-red::-moz-range-thumb {
+  height: 18px;
+  width: 18px;
+  border-radius: 50%;
+  background: #e23744;
+  cursor: pointer;
+  border: 2px solid #ffffff;
+  box-shadow: 0 1px 3px rgba(226, 55, 68, 0.4);
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+.skeleton-box {
+  background: linear-gradient(90deg, #f3ecec 25%, #faecec 50%, #f3ecec 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.8s infinite;
+}

@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bengaluru Restaurant Finder — Component Sheet & Main App</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      background-color: #F7F5F5;
+      color: #3D3D3D;
+      -webkit-font-smoothing: antialiased;
+    }
+    
+    /* Custom brand colors and styles */
+    .bg-warm-canvas { background-color: #FFFBFB; }
+    .border-divider { border-color: #F1E4E4; }
+    .text-heading { color: #1C1C1C; }
+    .text-body { color: #3D3D3D; }
+    .text-muted-custom { color: #767676; }
+    
+    .bg-brand-red { background-color: #E23744; }
+    .bg-brand-pressed { background-color: #CB202D; }
+    .bg-soft-red { background-color: #FFF1F1; }
+    .text-brand-red { color: #E23744; }
+    .border-brand-red { border-color: #E23744; }
+    
+    .card-shadow {
+      box-shadow: 0 1px 2px rgba(28, 28, 28, 0.06);
+    }
+    
+    .card-shadow-hover {
+      box-shadow: 0 4px 12px rgba(28, 28, 28, 0.08);
+    }
+    
+    /* Custom Red Slider */
+    input[type=range].slider-red {
+      -webkit-appearance: none;
+      width: 100%;
+      background: transparent;
+    }
+    input[type=range].slider-red:focus {
+      outline: none;
+    }
+    input[type=range].slider-red::-webkit-slider-runnable-track {
+      width: 100%;
+      height: 6px;
+      cursor: pointer;
+      background: #F1E4E4;
+      border-radius: 9999px;
+    }
+    input[type=range].slider-red::-webkit-slider-thumb {
+      height: 18px;
+      width: 18px;
+      border-radius: 50%;
+      background: #E23744;
+      cursor: pointer;
+      -webkit-appearance: none;
+      margin-top: -6px;
+      box-shadow: 0 1px 3px rgba(226, 55, 68, 0.4);
+      border: 2px solid #FFFFFF;
+      transition: transform 0.1s ease;
+    }
+    input[type=range].slider-red::-webkit-slider-thumb:hover {
+      transform: scale(1.15);
+    }
+
+    /* Skeleton Shimmer */
+    @keyframes shimmer {
+      0% { background-position: -200% 0; }
+      100% { background-position: 200% 0; }
+    }
+    .skeleton-box {
+      background: linear-gradient(90deg, #F3ECEC 25%, #FAECEC 50%, #F3ECEC 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.8s infinite;
+    }
+  </style>
+</head>
+<body class="p-6 md:p-10 space-y-12">
+
+  <!-- Artboard Container: 1440px target width standard -->
+  <div class="max-w-[1440px] mx-auto space-y-16">
+
+    <!-- Global Artboard Header -->
+    <header class="flex flex-col md:flex-row md:items-center justify-between pb-6 border-b border-divider gap-4">
+      <div>
+        <div class="flex items-center gap-3">
+          <span class="px-2.5 py-1 text-xs font-semibold uppercase tracking-wider bg-soft-red text-brand-red rounded-md">Design Specification</span>
+          <span class="text-xs text-muted-custom">Desktop Web App (1440px Canvas)</span>
+        </div>
+        <h1 class="text-3xl font-bold text-heading mt-1.5 tracking-tight">Bengaluru Restaurant Finder</h1>
+        <p class="text-sm text-muted-custom mt-0.5">Component-driven architecture: Complete UI Component Sheet & Assembly View</p>
+      </div>
+      <div class="flex items-center gap-3 self-start md:self-auto text-xs bg-white px-3.5 py-2 rounded-xl border border-divider card-shadow">
+        <span class="inline-block w-2.5 h-2.5 rounded-full bg-[#267E3E]"></span>
+        <span class="font-medium text-heading">Light theme · Zomato red #E23744 · 8px Grid</span>
+      </div>
+    </header>
+
+
+    <!-- ========================================================================= -->
+    <!-- FRAME 1: COMPONENT SHEET                                                  -->
+    <!-- ========================================================================= -->
+    <section class="bg-warm-canvas border border-divider rounded-2xl p-8 card-shadow space-y-10">
+      
+      <!-- Frame Title & Meta -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-divider gap-2">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-red text-white text-xs font-bold">1</span>
+          <h2 class="text-xl font-bold text-heading">Frame 1 — Component Sheet</h2>
+        </div>
+        <p class="text-xs text-muted-custom">Atomic UI library with states (Default, Hover, Selected / Active, Disabled)</p>
+      </div>
+
+      <!-- Component Grid -->
+      <div class="space-y-10">
+
+        <!-- 1. AppHeader Component -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: AppHeader</span>
+            <span class="text-[11px] text-muted-custom">Global navigation / branding banner</span>
+          </div>
+          <div class="bg-white p-4 rounded-xl border border-divider card-shadow">
+            <div class="flex items-center justify-between flex-wrap gap-4">
+              <div class="flex items-center gap-3">
+                <div class="w-10 h-10 rounded-xl bg-brand-red flex items-center justify-center text-white font-bold text-lg shadow-sm">
+                  BR
+                </div>
+                <div>
+                  <div class="flex items-center gap-2">
+                    <span class="text-base font-bold text-heading leading-tight">Bengaluru Restaurant Finder</span>
+                    <span class="text-[11px] font-medium bg-soft-red text-brand-red px-2 py-0.5 rounded-full">AI Curated</span>
+                  </div>
+                  <p class="text-xs text-muted-custom mt-0.5">Searching 12,000 restaurants from the Bengaluru dataset</p>
+                </div>
+              </div>
+              <div class="text-xs text-muted-custom flex items-center gap-2 bg-[#FFFBFB] px-3 py-1.5 rounded-lg border border-divider">
+                <span class="w-2 h-2 rounded-full bg-[#267E3E]"></span>
+                Live dataset verified
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2. SelectField & SegmentedControl -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- SelectField -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: SelectField</span>
+              <span class="text-[11px] text-muted-custom">Default & Focus states</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-4">
+              <!-- Default state -->
+              <div>
+                <label class="block text-xs font-semibold text-heading mb-1.5">Locality (Default)</label>
+                <div class="relative">
+                  <select class="w-full bg-white text-sm text-heading border border-divider rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition cursor-pointer">
+                    <option selected>Indiranagar</option>
+                    <option>Koramangala</option>
+                    <option>Lavelle Road</option>
+                    <option>Whitefield</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-muted-custom">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+                </div>
+              </div>
+              <!-- Focus / Active state -->
+              <div>
+                <label class="block text-xs font-semibold text-heading mb-1.5">City zone (Active / Focus Ring)</label>
+                <div class="relative">
+                  <select class="w-full bg-white text-sm text-heading border border-brand-red ring-2 ring-soft-red rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none cursor-pointer">
+                    <option selected>Any city zone</option>
+                    <option>East Bengaluru</option>
+                    <option>Central Bengaluru</option>
+                    <option>South Bengaluru</option>
+                  </select>
+                  <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-brand-red">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- SegmentedControl "Budget" -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: SegmentedControl</span>
+              <span class="text-[11px] text-muted-custom">Budget selector (Low | Med | High)</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-4">
+              <div>
+                <label class="block text-xs font-semibold text-heading mb-2">Budget tier</label>
+                <div class="grid grid-cols-3 gap-2 p-1.5 bg-[#FFFBFB] border border-divider rounded-xl">
+                  <button type="button" class="py-2 text-xs font-medium text-muted-custom rounded-lg hover:text-heading hover:bg-white transition text-center">
+                    Low
+                    <span class="block text-[10px] text-muted-custom">&lt; ₹600</span>
+                  </button>
+                  <button type="button" class="py-2 text-xs font-semibold text-brand-red bg-soft-red border border-brand-red rounded-lg transition text-center card-shadow">
+                    Medium
+                    <span class="block text-[10px] text-brand-red">₹600 - ₹1,500</span>
+                  </button>
+                  <button type="button" class="py-2 text-xs font-medium text-muted-custom rounded-lg hover:text-heading hover:bg-white transition text-center">
+                    High
+                    <span class="block text-[10px] text-muted-custom">&gt; ₹1,500</span>
+                  </button>
+                </div>
+              </div>
+              <div class="pt-2">
+                <span class="text-[11px] text-muted-custom">Active state utilizes #FFF1F1 background with #E23744 text and outer stroke.</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 3. CuisineChips & Sliders -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- CuisineChips (Multi-Select) -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: CuisineChips</span>
+              <span class="text-[11px] text-muted-custom">Multi-select pill chips</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-3">
+              <label class="block text-xs font-semibold text-heading">Cuisines (Selected & Unselected)</label>
+              <div class="flex flex-wrap gap-2 pt-1">
+                <!-- Selected Chips -->
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-soft-red text-brand-red border border-brand-red cursor-pointer">
+                  <svg class="w-3.5 h-3.5 text-brand-red" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Italian
+                </span>
+                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold bg-soft-red text-brand-red border border-brand-red cursor-pointer">
+                  <svg class="w-3.5 h-3.5 text-brand-red" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Continental
+                </span>
+                <!-- Unselected Chips -->
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition cursor-pointer">
+                  North Indian
+                </span>
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition cursor-pointer">
+                  Chinese
+                </span>
+                <span class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition cursor-pointer">
+                  Cafe
+                </span>
+              </div>
+              <p class="text-[11px] text-muted-custom">Selected: #FFF1F1 background, #E23744 border + check icon. Unselected: White pill with #F1E4E4 border.</p>
+            </div>
+          </div>
+
+          <!-- SliderField -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: SliderField</span>
+              <span class="text-[11px] text-muted-custom">Custom red range sliders</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-5">
+              <!-- Slider 1 -->
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-semibold text-heading">Minimum rating</label>
+                  <span class="text-xs font-bold px-2 py-0.5 rounded bg-soft-red text-brand-red">4.0 ★</span>
+                </div>
+                <input type="range" min="0" max="5" step="0.1" value="4.0" class="slider-red">
+                <div class="flex justify-between text-[10px] text-muted-custom mt-1 font-medium">
+                  <span>0.0</span>
+                  <span>2.5</span>
+                  <span>5.0</span>
+                </div>
+              </div>
+              <!-- Slider 2 -->
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-semibold text-heading">Number of recommendations</label>
+                  <span class="text-xs font-bold px-2 py-0.5 rounded bg-soft-red text-brand-red">5 places</span>
+                </div>
+                <input type="range" min="3" max="5" step="1" value="5" class="slider-red">
+                <div class="flex justify-between text-[10px] text-muted-custom mt-1 font-medium">
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 4. TextArea & PrimaryButton -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- TextArea -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: TextArea</span>
+              <span class="text-[11px] text-muted-custom">Input field with helper caption</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-2">
+              <label class="block text-xs font-semibold text-heading">Anything else?</label>
+              <textarea rows="3" class="w-full text-xs text-heading placeholder-gray-400 border border-divider rounded-lg p-3 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red resize-none" placeholder="e.g. family-friendly, quick service, good for a date"></textarea>
+              <div class="flex justify-between items-center text-[11px] text-muted-custom pt-1">
+                <span>Natural language filters for AI ranking</span>
+                <span>300 characters</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- PrimaryButton Variants -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: PrimaryButton</span>
+              <span class="text-[11px] text-muted-custom">Default, Pressed & Disabled Loading</span>
+            </div>
+            <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-3">
+              <!-- Default -->
+              <div>
+                <button type="button" class="w-full py-2.5 px-4 bg-brand-red hover:bg-[#d02c38] text-white text-xs font-semibold rounded-xl card-shadow transition text-center flex items-center justify-center gap-2">
+                  <span>Find restaurants</span>
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                </button>
+                <div class="text-[10px] text-muted-custom mt-1 text-center">Default (#E23744) / Hover</div>
+              </div>
+              <!-- Loading / Disabled -->
+              <div>
+                <button type="button" disabled class="w-full py-2.5 px-4 bg-[#F8A5AC] text-white text-xs font-semibold rounded-xl cursor-not-allowed text-center flex items-center justify-center gap-2">
+                  <svg class="animate-spin h-3.5 w-3.5 text-white" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg>
+                  <span>Finding matches…</span>
+                </button>
+                <div class="text-[10px] text-muted-custom mt-1 text-center">Disabled / Loading state</div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- 5. StatusBanner Variants -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: StatusBanner (All 4 Variants)</span>
+            <span class="text-[11px] text-muted-custom">Lightweight tinted feedback strips</span>
+          </div>
+          <div class="bg-white p-5 rounded-xl border border-divider card-shadow space-y-3">
+            
+            <!-- Success Banner -->
+            <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#E8F5E9] text-[#1F6B34] border border-[#C8E6C9] text-xs">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+              <span><strong>Success:</strong> Strong matches in Indiranagar for Italian and Continental, around a medium budget, rated 4.0 or higher.</span>
+            </div>
+
+            <!-- Info Banner -->
+            <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#EEF4FC] text-[#1A4B8C] border border-[#D5E5F9] text-xs">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
+              <span><strong>Info:</strong> 142 restaurants evaluated; showing top ranked recommendations based on sentiment score.</span>
+            </div>
+
+            <!-- Warning Banner -->
+            <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#FFF6E8] text-[#8A4B08] border border-[#FDE5BE] text-xs">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd"></path></svg>
+              <span><strong>Warning:</strong> High demand locality. Online table reservation is strongly advised for weekend dinners.</span>
+            </div>
+
+            <!-- Error Banner -->
+            <div class="flex items-center gap-3 px-4 py-2.5 rounded-xl bg-[#FFF1F1] text-[#9B1C2C] border border-[#F8D2D2] text-xs">
+              <svg class="w-4 h-4 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd"></path></svg>
+              <span><strong>Error:</strong> Strict criteria returned 0 spots. Please expand budget or adjust minimum rating threshold.</span>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- 6. RestaurantCard Component Sample -->
+        <div class="space-y-3">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: RestaurantCard</span>
+            <span class="text-[11px] text-muted-custom">12px radius, card-shadow, rank badge, rating pill, meta line & explanation</span>
+          </div>
+          <div class="bg-white p-5 rounded-[12px] border border-divider card-shadow hover:border-brand-red transition">
+            <div class="flex items-start justify-between gap-4">
+              <div class="flex items-start gap-3">
+                <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-soft-red text-brand-red font-bold text-xs flex items-center justify-center border border-brand-red">
+                  #1
+                </span>
+                <div>
+                  <h3 class="text-base font-bold text-heading leading-tight">Sample Restaurant Name</h3>
+                  <p class="text-xs text-muted-custom mt-1">Italian, Continental · ≈ ₹1,200 for two · Indiranagar</p>
+                </div>
+              </div>
+              <!-- Green Rating Pill -->
+              <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold text-[#267E3E] bg-[#E8F5E9] border border-[#C8E6C9] flex-shrink-0">
+                4.6 ★
+              </span>
+            </div>
+
+            <!-- Feature Badges -->
+            <div class="flex items-center gap-2 mt-3.5">
+              <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                Table booking
+              </span>
+              <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                Online ordering
+              </span>
+            </div>
+
+            <!-- 2-line AI Explanation -->
+            <p class="text-xs text-body mt-3 pt-3 border-t border-divider leading-relaxed">
+              Curated match based on your preferences: High score for freshly baked sourdough pizzas and spacious seating suited for family gatherings.
+            </p>
+          </div>
+        </div>
+
+        <!-- 7. EmptyState & LoadingState Components -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          
+          <!-- EmptyState Component -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: EmptyState</span>
+              <span class="text-[11px] text-muted-custom">No matching results view</span>
+            </div>
+            <div class="bg-white p-7 rounded-[12px] border border-divider card-shadow text-center flex flex-col items-center justify-center min-h-[200px]">
+              <div class="w-10 h-10 rounded-full bg-soft-red text-brand-red flex items-center justify-center mb-3">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+              </div>
+              <h4 class="text-sm font-bold text-heading">No matching restaurants found</h4>
+              <p class="text-xs text-muted-custom max-w-xs mt-1 leading-relaxed">
+                Try lowering the minimum rating slider, adjusting your budget tier, or switching locality to search city-wide.
+              </p>
+            </div>
+          </div>
+
+          <!-- LoadingState Component (Skeleton) -->
+          <div class="space-y-3">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold uppercase tracking-wider text-muted-custom">Component: LoadingState</span>
+              <span class="text-[11px] text-muted-custom">Skeleton placeholder cards</span>
+            </div>
+            <div class="space-y-3">
+              <!-- Skeleton Card 1 -->
+              <div class="bg-white p-4 rounded-[12px] border border-divider card-shadow space-y-3">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-6 h-6 rounded skeleton-box"></div>
+                    <div class="w-32 h-4 rounded skeleton-box"></div>
+                  </div>
+                  <div class="w-12 h-5 rounded skeleton-box"></div>
+                </div>
+                <div class="w-48 h-3 rounded skeleton-box"></div>
+                <div class="flex gap-2 pt-1">
+                  <div class="w-20 h-4 rounded-full skeleton-box"></div>
+                  <div class="w-24 h-4 rounded-full skeleton-box"></div>
+                </div>
+              </div>
+              <!-- Skeleton Card 2 -->
+              <div class="bg-white p-4 rounded-[12px] border border-divider card-shadow space-y-3 opacity-70">
+                <div class="flex justify-between items-center">
+                  <div class="flex items-center gap-2.5">
+                    <div class="w-6 h-6 rounded skeleton-box"></div>
+                    <div class="w-28 h-4 rounded skeleton-box"></div>
+                  </div>
+                  <div class="w-12 h-5 rounded skeleton-box"></div>
+                </div>
+                <div class="w-40 h-3 rounded skeleton-box"></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+
+    <!-- ========================================================================= -->
+    <!-- FRAME 2: MAIN APP SCREEN (COMPOSED FROM EXACT COMPONENTS ABOVE)          -->
+    <!-- ========================================================================= -->
+    <section class="bg-warm-canvas border border-divider rounded-2xl p-8 card-shadow space-y-8">
+      
+      <!-- Frame Title & Meta -->
+      <div class="flex flex-col sm:flex-row sm:items-center justify-between pb-4 border-b border-divider gap-2">
+        <div class="flex items-center gap-3">
+          <span class="flex items-center justify-center w-7 h-7 rounded-lg bg-brand-red text-white text-xs font-bold">2</span>
+          <div>
+            <h2 class="text-xl font-bold text-heading">Frame 2 — Main App Screen</h2>
+            <p class="text-xs text-muted-custom">Assembled strictly using components from Frame 1</p>
+          </div>
+        </div>
+        <span class="text-xs font-semibold px-3 py-1 rounded-full bg-[#E8F5E9] text-[#1F6B34] border border-[#C8E6C9]">
+          1440px Desktop Composition
+        </span>
+      </div>
+
+      <!-- App Header Component (spanning the page) -->
+      <div class="bg-white p-4 sm:p-5 rounded-xl border border-divider card-shadow">
+        <div class="flex items-center justify-between flex-wrap gap-4">
+          <div class="flex items-center gap-3.5">
+            <div class="w-11 h-11 rounded-xl bg-brand-red flex items-center justify-center text-white font-bold text-xl shadow-sm">
+              BR
+            </div>
+            <div>
+              <div class="flex items-center gap-2.5">
+                <h1 class="text-lg font-bold text-heading tracking-tight leading-tight">Bengaluru Restaurant Finder</h1>
+                <span class="text-[11px] font-semibold bg-soft-red text-brand-red px-2 py-0.5 rounded-full border border-brand-red">AI Match</span>
+              </div>
+              <p class="text-xs text-muted-custom mt-0.5">Searching 12,000 restaurants from the Bengaluru dataset</p>
+            </div>
+          </div>
+          
+          <div class="flex items-center gap-4 text-xs">
+            <div class="hidden md:flex items-center gap-2 bg-[#FFFBFB] px-3.5 py-1.5 rounded-lg border border-divider text-muted-custom">
+              <span class="w-2 h-2 rounded-full bg-[#267E3E]"></span>
+              Locality data current · 2024
+            </div>
+            <button class="text-xs font-medium text-muted-custom hover:text-brand-red transition">Reset filters</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Main Layout: 380px Left Sidebar + Right Results Column -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+
+        <!-- ===================================================================== -->
+        <!-- LEFT COLUMN: Sticky Preferences (380px fixed width target)            -->
+        <!-- ===================================================================== -->
+        <aside class="lg:col-span-4 xl:col-span-4 w-full bg-white rounded-[12px] border border-divider p-6 card-shadow space-y-6 lg:sticky lg:top-8">
+          
+          <div class="flex items-center justify-between border-b border-divider pb-3">
+            <div>
+              <h3 class="text-sm font-bold text-heading uppercase tracking-wide">Your preferences</h3>
+              <p class="text-[11px] text-muted-custom">Tailor criteria for real-time ranking</p>
+            </div>
+            <span class="text-[10px] font-semibold bg-soft-red text-brand-red px-2 py-0.5 rounded">6 active</span>
+          </div>
+
+          <!-- Preferences Form Controls -->
+          <form class="space-y-5" onsubmit="event.preventDefault();">
+
+            <!-- 1. Locality -->
+            <div>
+              <label class="block text-xs font-semibold text-heading mb-1.5">Locality</label>
+              <div class="relative">
+                <select class="w-full bg-white text-xs font-medium text-heading border border-divider rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition cursor-pointer">
+                  <option selected>Indiranagar</option>
+                  <option>Koramangala</option>
+                  <option>Lavelle Road</option>
+                  <option>MG Road</option>
+                  <option>Whitefield</option>
+                  <option>Jayanagar</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-muted-custom">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2. City Zone -->
+            <div>
+              <label class="block text-xs font-semibold text-heading mb-1.5">City zone</label>
+              <div class="relative">
+                <select class="w-full bg-white text-xs font-medium text-heading border border-divider rounded-lg px-3.5 py-2.5 appearance-none focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red transition cursor-pointer">
+                  <option selected>Any city zone</option>
+                  <option>Central Bengaluru</option>
+                  <option>East Bengaluru</option>
+                  <option>South Bengaluru</option>
+                  <option>North Bengaluru</option>
+                </select>
+                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-3 text-muted-custom">
+                  <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3. Budget (Segmented Control: Medium selected) -->
+            <div>
+              <label class="block text-xs font-semibold text-heading mb-2">Budget</label>
+              <div class="grid grid-cols-3 gap-1.5 p-1 bg-[#FFFBFB] border border-divider rounded-xl">
+                <button type="button" class="py-2 text-xs font-medium text-muted-custom rounded-lg hover:text-heading transition text-center">
+                  Low
+                </button>
+                <button type="button" class="py-2 text-xs font-semibold text-brand-red bg-soft-red border border-brand-red rounded-lg transition text-center card-shadow">
+                  Medium
+                </button>
+                <button type="button" class="py-2 text-xs font-medium text-muted-custom rounded-lg hover:text-heading transition text-center">
+                  High
+                </button>
+              </div>
+              <div class="text-[10px] text-muted-custom mt-1">Medium budget matches ≈ ₹600 - ₹1,500 for two</div>
+            </div>
+
+            <!-- 4. Cuisine Chips (Italian and Continental selected) -->
+            <div>
+              <label class="block text-xs font-semibold text-heading mb-2">Cuisines</label>
+              <div class="flex flex-wrap gap-2">
+                <!-- Selected: Italian -->
+                <button type="button" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-soft-red text-brand-red border border-brand-red card-shadow">
+                  <svg class="w-3 h-3 text-brand-red" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Italian
+                </button>
+                <!-- Selected: Continental -->
+                <button type="button" class="inline-flex items-center gap-1 px-3 py-1.5 rounded-full text-xs font-semibold bg-soft-red text-brand-red border border-brand-red card-shadow">
+                  <svg class="w-3 h-3 text-brand-red" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+                  Continental
+                </button>
+                <!-- Unselected -->
+                <button type="button" class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition">
+                  North Indian
+                </button>
+                <button type="button" class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition">
+                  Chinese
+                </button>
+                <button type="button" class="inline-flex items-center px-3 py-1.5 rounded-full text-xs font-medium bg-white text-body border border-divider hover:border-gray-400 hover:text-heading transition">
+                  Cafe
+                </button>
+              </div>
+            </div>
+
+            <!-- 5. Sliders: Minimum rating (4.0) & Recommendations (5) -->
+            <div class="space-y-4 pt-1">
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-semibold text-heading">Minimum rating</label>
+                  <span class="text-xs font-bold px-2 py-0.5 rounded bg-soft-red text-brand-red">4.0 ★</span>
+                </div>
+                <input type="range" min="0" max="5" step="0.1" value="4.0" class="slider-red">
+                <div class="flex justify-between text-[10px] text-muted-custom mt-1 font-medium">
+                  <span>0.0</span>
+                  <span>4.0 Selected</span>
+                  <span>5.0</span>
+                </div>
+              </div>
+
+              <div>
+                <div class="flex justify-between items-center mb-1.5">
+                  <label class="text-xs font-semibold text-heading">Number of recommendations</label>
+                  <span class="text-xs font-bold px-2 py-0.5 rounded bg-soft-red text-brand-red">5</span>
+                </div>
+                <input type="range" min="3" max="5" step="1" value="5" class="slider-red">
+                <div class="flex justify-between text-[10px] text-muted-custom mt-1 font-medium">
+                  <span>3</span>
+                  <span>4</span>
+                  <span>5</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6. Anything else? TextArea with value -->
+            <div>
+              <label class="block text-xs font-semibold text-heading mb-1.5">Anything else?</label>
+              <textarea rows="2" class="w-full text-xs text-heading border border-divider rounded-lg p-3 focus:outline-none focus:border-brand-red focus:ring-1 focus:ring-brand-red resize-none">family-friendly, easy parking</textarea>
+              <div class="flex justify-between items-center text-[10px] text-muted-custom mt-1">
+                <span>Natural language context applied</span>
+                <span>28/300</span>
+              </div>
+            </div>
+
+            <!-- 7. Primary Action Button -->
+            <div class="pt-2">
+              <button type="submit" class="w-full py-3 px-4 bg-brand-red hover:bg-brand-pressed text-white text-xs font-semibold rounded-xl card-shadow transition text-center flex items-center justify-center gap-2">
+                <span>Find restaurants</span>
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </button>
+            </div>
+
+          </form>
+
+        </aside>
+
+
+        <!-- ===================================================================== -->
+        <!-- RIGHT COLUMN: Results Section                                         -->
+        <!-- ===================================================================== -->
+        <main class="lg:col-span-8 xl:col-span-8 space-y-6">
+
+          <!-- Success Banner -->
+          <div class="flex items-center gap-3 px-4 py-3 rounded-xl bg-[#E8F5E9] text-[#1F6B34] border border-[#C8E6C9] text-xs card-shadow">
+            <svg class="w-5 h-5 flex-shrink-0 text-[#267E3E]" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+            <p class="leading-relaxed">
+              <strong>Matches found:</strong> Strong matches in Indiranagar for Italian and Continental, around a medium budget, rated 4.0 or higher.
+            </p>
+          </div>
+
+          <!-- Section Title & Meta -->
+          <div class="flex items-center justify-between pt-1">
+            <div>
+              <h2 class="text-lg font-bold text-heading">Top 3 recommendations</h2>
+              <p class="text-xs text-muted-custom mt-0.5">Ranked by cuisine affinity, verified guest sentiment, and specific amenity tags</p>
+            </div>
+            <div class="text-xs text-muted-custom bg-white px-3 py-1.5 rounded-lg border border-divider">
+              Showing <span class="font-bold text-heading">3 of 5</span> shortlisted
+            </div>
+          </div>
+
+          <!-- The 3 Recommendation Cards -->
+          <div class="space-y-4">
+
+            <!-- Card 1: Toit -->
+            <article class="bg-white p-5 rounded-[12px] border border-divider card-shadow hover:border-brand-red transition">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-start gap-3">
+                  <!-- Rank Badge -->
+                  <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-soft-red text-brand-red font-bold text-xs flex items-center justify-center border border-brand-red">
+                    #1
+                  </span>
+                  <div>
+                    <h3 class="text-base font-bold text-heading leading-tight hover:text-brand-red transition cursor-pointer">
+                      Toit
+                    </h3>
+                    <p class="text-xs text-muted-custom mt-1">Continental, American · ≈ ₹1,500 for two · Indiranagar</p>
+                  </div>
+                </div>
+                <!-- Rating Pill: green #267E3E on #E8F5E9 -->
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold text-[#267E3E] bg-[#E8F5E9] border border-[#C8E6C9] flex-shrink-0">
+                  4.6 ★
+                </span>
+              </div>
+
+              <!-- Feature Badges -->
+              <div class="flex items-center gap-2 mt-3.5">
+                <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                  Table booking
+                </span>
+                <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                  Online ordering
+                </span>
+              </div>
+
+              <!-- 2-line AI Explanation -->
+              <p class="text-xs text-body mt-3 pt-3 border-t border-divider leading-relaxed">
+                Lively brewpub that fits a medium budget and your parking note, with a rating well above 4.0.
+              </p>
+            </article>
+
+            <!-- Card 2: Windmills Craftworks -->
+            <article class="bg-white p-5 rounded-[12px] border border-divider card-shadow hover:border-brand-red transition">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-start gap-3">
+                  <!-- Rank Badge -->
+                  <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-soft-red text-brand-red font-bold text-xs flex items-center justify-center border border-brand-red">
+                    #2
+                  </span>
+                  <div>
+                    <h3 class="text-base font-bold text-heading leading-tight hover:text-brand-red transition cursor-pointer">
+                      Windmills Craftworks
+                    </h3>
+                    <p class="text-xs text-muted-custom mt-1">Continental, Italian · ≈ ₹1,800 for two · Indiranagar</p>
+                  </div>
+                </div>
+                <!-- Rating Pill -->
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold text-[#267E3E] bg-[#E8F5E9] border border-[#C8E6C9] flex-shrink-0">
+                  4.5 ★
+                </span>
+              </div>
+
+              <!-- Feature Badges (Single badge Table booking) -->
+              <div class="flex items-center gap-2 mt-3.5">
+                <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                  Table booking
+                </span>
+              </div>
+
+              <!-- 2-line AI Explanation -->
+              <p class="text-xs text-body mt-3 pt-3 border-t border-divider leading-relaxed">
+                Best for a sit-down meal; cuisine overlap is high and the rating is among the strongest in this shortlist.
+              </p>
+            </article>
+
+            <!-- Card 3: Olive Bar & Kitchen -->
+            <article class="bg-white p-5 rounded-[12px] border border-divider card-shadow hover:border-brand-red transition">
+              <div class="flex items-start justify-between gap-4">
+                <div class="flex items-start gap-3">
+                  <!-- Rank Badge -->
+                  <span class="flex-shrink-0 w-7 h-7 rounded-lg bg-soft-red text-brand-red font-bold text-xs flex items-center justify-center border border-brand-red">
+                    #3
+                  </span>
+                  <div>
+                    <h3 class="text-base font-bold text-heading leading-tight hover:text-brand-red transition cursor-pointer">
+                      Olive Bar & Kitchen
+                    </h3>
+                    <p class="text-xs text-muted-custom mt-1">Italian, Mediterranean · ≈ ₹2,000 for two · Indiranagar</p>
+                  </div>
+                </div>
+                <!-- Rating Pill -->
+                <span class="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-xs font-bold text-[#267E3E] bg-[#E8F5E9] border border-[#C8E6C9] flex-shrink-0">
+                  4.4 ★
+                </span>
+              </div>
+
+              <!-- Feature Badges -->
+              <div class="flex items-center gap-2 mt-3.5">
+                <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                  Table booking
+                </span>
+                <span class="text-[11px] font-medium text-body px-2.5 py-0.5 rounded-full border border-divider bg-[#FFFBFB]">
+                  Online ordering
+                </span>
+              </div>
+
+              <!-- 2-line AI Explanation -->
+              <p class="text-xs text-body mt-3 pt-3 border-t border-divider leading-relaxed">
+                Closest Italian match; slightly above a typical medium budget but kept because rating and cuisine fit are strong.
+              </p>
+            </article>
+
+          </div>
+
+          <!-- Bottom Context Note -->
+          <div class="pt-4 flex flex-col sm:flex-row items-center justify-between text-xs text-muted-custom border-t border-divider gap-2">
+            <span>Showing live results based on 12,000 verified Bengaluru listings</span>
+            <div class="flex items-center gap-4">
+              <span class="text-heading font-medium">Page 1 of 1</span>
+              <button class="text-brand-red font-medium hover:underline">Export shortlist</button>
+            </div>
+          </div>
+
+        </main>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</body>
+</html>

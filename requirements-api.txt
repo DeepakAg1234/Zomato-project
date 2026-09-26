@@ -1,0 +1,12 @@
+# Runtime dependencies for the Railway API image.
+# Ingest-only and local-demo packages stay in requirements.txt.
+pandas==3.0.6
+pyarrow==25.0.1
+
+python-dotenv==1.2.3
+pydantic==2.13.5
+
+groq==1.7.0
+
+fastapi==0.141.1
+uvicorn==0.53.0

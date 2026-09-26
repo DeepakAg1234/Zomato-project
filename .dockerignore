@@ -1,0 +1,14 @@
+.env
+.venv
+venv
+env
+.git
+.github
+frontend/node_modules
+frontend/dist
+__pycache__
+.pytest_cache
+.mypy_cache
+.ruff_cache
+data/raw
+*.parquet

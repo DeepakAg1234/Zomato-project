@@ -1,0 +1,19 @@
+# Data ingest / transform
+datasets==5.0.1
+pandas==3.0.6
+pyarrow==25.0.1
+
+# Config / validation
+python-dotenv==1.2.3
+pydantic==2.13.5
+
+# LLM (Groq)
+groq==1.7.0
+
+# UI / API (FastAPI unused until Phase 5)
+streamlit==1.64.0
+fastapi==0.141.1
+uvicorn==0.53.0
+
+# Tests
+pytest==9.1.1
