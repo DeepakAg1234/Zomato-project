@@ -26,18 +26,23 @@ _LOCAL_UI_ORIGINS = [
     "http://localhost:4173",
     "http://127.0.0.1:4173",
 ]
+_PRODUCTION_UI_ORIGINS = [
+    "https://zomato-project-weld.vercel.app",
+]
+# Covers the production host and Vercel preview URLs for this project.
+_DEFAULT_CORS_ORIGIN_REGEX = r"https://zomato-project.*\.vercel\.app"
 
 
 def _cors_settings() -> tuple[list[str], str | None]:
-    """Local Vite origins plus optional production origins from the environment."""
+    """Local Vite origins, the production Vercel host, plus optional extra origins."""
     origins = list(_LOCAL_UI_ORIGINS)
     seen = set(origins)
-    for origin in os.environ.get("CORS_ORIGINS", "").split(","):
-        cleaned = origin.strip()
+    for origin in (*_PRODUCTION_UI_ORIGINS, *os.environ.get("CORS_ORIGINS", "").split(",")):
+        cleaned = origin.strip().rstrip("/")
         if cleaned and cleaned not in seen:
             origins.append(cleaned)
             seen.add(cleaned)
-    regex = os.environ.get("CORS_ORIGIN_REGEX", "").strip() or None
+    regex = os.environ.get("CORS_ORIGIN_REGEX", "").strip() or _DEFAULT_CORS_ORIGIN_REGEX
     return origins, regex
 
 

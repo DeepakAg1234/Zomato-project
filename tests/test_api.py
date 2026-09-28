@@ -28,6 +28,36 @@ def test_health_does_not_load_the_store(monkeypatch):
     assert response.json() == {"status": "ok"}
 
 
+def test_cors_allows_deployed_vercel_origin_by_default(monkeypatch):
+    monkeypatch.delenv("CORS_ORIGINS", raising=False)
+    monkeypatch.delenv("CORS_ORIGIN_REGEX", raising=False)
+    client = TestClient(create_app())
+
+    production = client.options(
+        "/health",
+        headers={
+            "Origin": "https://zomato-project-weld.vercel.app",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+    preview = client.options(
+        "/health",
+        headers={
+            "Origin": "https://zomato-project-git-main-team.vercel.app",
+            "Access-Control-Request-Method": "GET",
+        },
+    )
+
+    assert (
+        production.headers["access-control-allow-origin"]
+        == "https://zomato-project-weld.vercel.app"
+    )
+    assert (
+        preview.headers["access-control-allow-origin"]
+        == "https://zomato-project-git-main-team.vercel.app"
+    )
+
+
 def test_cors_allows_localhost_configured_origins_and_preview_regex(monkeypatch):
     monkeypatch.setenv(
         "CORS_ORIGINS",

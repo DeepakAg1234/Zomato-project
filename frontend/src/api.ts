@@ -1,6 +1,6 @@
 import type { MetaResponse, Preferences, RecommendationResponse } from "./types";
 
-const API_BASE = import.meta.env.VITE_API_BASE ?? "";
+const API_BASE = (import.meta.env.VITE_API_BASE ?? "").replace(/\/+$/, "");
 
 async function readError(response: Response): Promise<string> {
   try {
