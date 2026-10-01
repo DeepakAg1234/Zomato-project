@@ -9,6 +9,63 @@ returned instead.
 > controls intentionally contain real areas from the dataset, not arbitrary
 > Indian cities.
 
+## Tech stack
+
+### Frontend
+
+The product UI is `frontend/`. Streamlit (`src/ui/app.py`) is a local demo of the same API.
+
+| Piece | Choice |
+| --- | --- |
+| UI | React 19 |
+| Language | TypeScript 5.9 |
+| Build | Vite 7 |
+| Styling | Tailwind CSS 4 |
+| API calls | `GET /meta` and `POST /recommendations` (Vite proxies these to port 8000 in dev) |
+
+### Backend
+
+| Piece | Choice |
+| --- | --- |
+| Language | Python 3.11+ (CI and the Docker image use 3.13) |
+| API | FastAPI, served by Uvicorn |
+| Validation | Pydantic |
+| Local demo UI | Streamlit |
+| Store | pandas + Apache Arrow parquet |
+| Ingest | Hugging Face `datasets` |
+| Tests | pytest (in-memory fixtures, mocked LLM, no network) |
+
+Shared recommendation logic lives in `src/services/recommend.py`, so Streamlit and FastAPI use the same filters, scorer, and LLM client.
+
+## LLM
+
+Provider is [Groq](https://groq.com/). The key stays in `.env` on the server (`GROQ_API_KEY`). It is never sent to the browser.
+
+| Setting | Value |
+| --- | --- |
+| Default model | `openai/gpt-oss-120b` |
+| Also supported | `qwen/qwen3.8-27b` |
+| Client | `groq` Python SDK |
+| Timeout | `GROQ_TIMEOUT_SECONDS` (default 20) |
+| Output | Strict JSON schema: `summary` plus `{id, rank, explanation}` per restaurant |
+
+What the model does:
+
+- Ranks a shortlist and writes a short explanation for each card.
+- Sees at most 15 candidates (default 12). Hard filters run in code before that call.
+- Does not receive the full catalogue, phone numbers, URLs, or full addresses.
+- Returned ids are joined back to local records, so a restaurant that was not in the shortlist cannot appear.
+
+If the key is missing, the call times out, or the JSON is invalid after one repair attempt, the API still returns the shortlist ranked by the heuristic score and sets `engine` to `fallback`. An empty shortlist returns `engine: none` and asks the user to relax a filter.
+
+Candidate score, before the LLM call:
+
+```text
+0.45 * rating + 0.25 * log(votes) + 0.20 * cuisine overlap + 0.10 * extra-preference keywords
+```
+
+Free-text preferences (for example "family-friendly") only move restaurants inside that shortlist. They do not change who is eligible. Location, budget, cuisine, and minimum rating stay code filters.
+
 ## Data source
 
 Restaurant listings come from the
